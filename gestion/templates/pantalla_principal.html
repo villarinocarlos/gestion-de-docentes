@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pantalla Principal</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+        .card { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a la Pantalla Principal</h1>
+
+    <!-- Sección visible solo para Admin -->
+    {% if role == 'admin' %}
+        <div class="card">
+            <h2>Gestión de Usuarios</h2>
+            <p>Acceso completo a la administración del sistema.</p>
+        </div>
+    {% endif %}
+
+    <!-- Sección visible para Admin y Coordinador -->
+    {% if role == 'admin' or role == 'coordinador' %}
+        <div class="card">
+            <h2>Reportes Académicos</h2>
+            <p>Acceso a reportes y análisis de datos.</p>
+        </div>
+    {% endif %}
+
+    <!-- Sección visible solo para Docentes -->
+    {% if role == 'docente' %}
+        <div class="card">
+            <h2>Mis Clases</h2>
+            <p>Gestión de asignaturas y actividades.</p>
+        </div>
+    {% endif %}
+
+    <!-- Sección común para todos los roles -->
+    <div class="card">
+        <h2>Perfil de Usuario</h2>
+        <p>Consulta y edición de información personal.</p>
+    </div>
+    <a href="{% url 'logout' %}">Cerrar Sesión</a>
+</body>
+</html>
